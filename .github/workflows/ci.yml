@@ -17,7 +17,7 @@ jobs:
           files=$(git ls-files '*.md' '*.yml')
           fail=0
           check() { # label regex
-            if grep -nEI "$2" $files | grep -vE 'example\.invalid|reihlinstinct|users\.noreply'; then
+            if grep -nEI "$2" $files | grep -vE 'example\.invalid|reihlinstinct|users\.noreply|ossf/scorecard-action@'; then
               echo "::error::possible $1 found"; fail=1; fi
           }
           check "email address" '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}'
