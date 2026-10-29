@@ -87,6 +87,14 @@ class GuardTests(unittest.TestCase):
             findings=g.scan(p)
             self.assertIn('first.txt',{f.path for f in findings if f.rule=='unhashed-requirement'})
             self.assertNotIn('second.txt',{f.path for f in findings if f.rule=='unhashed-requirement'})
+    def test_absolute_venv_pip_requirement_contents(self):
+        for pip in ['/tmp/venv/bin/pip', '/tmp/venv/bin/pip3', '/tmp/venv/bin/pip3.13']:
+            for command in [pip+' install --require-hashes -r requirements.txt', 'bash -c "'+pip+' install --require-hashes -r requirements.txt"']:
+                with self.subTest(command=command), tempfile.TemporaryDirectory() as d:
+                    root=Path(d);(root/'.github/workflows').mkdir(parents=True)
+                    (root/'.github/workflows/test.yml').write_text('permissions: {}\nrun: '+command+'\n')
+                    (root/'requirements.txt').write_text('x>=1\n')
+                    self.assertIn('unhashed-requirement',{f.rule for f in g.scan(root)})
     def test_nested_shell_requirements(self):
         for shell in ['bash','sh']:
             for quote in ['"', "'"]:
