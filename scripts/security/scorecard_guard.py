@@ -42,7 +42,7 @@ def requirement_refs(line):
     refs=[]
     for segment in pip_segments(line):
         for idx,token in enumerate(segment):
-            if not re.fullmatch(r'pip(?:3)?',token):continue
+            if not re.fullmatch(r'pip(?:3(?:\.\d+)?)?',Path(token).name):continue
             pos=idx+1
             while pos<len(segment) and segment[pos].startswith('--'):
                 opt=segment[pos];pos+=1
