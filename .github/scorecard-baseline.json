@@ -1,0 +1,21 @@
+{
+ "version": 1,
+ "findings": [
+  {
+   "path": ".github/workflows/scorecard.yml",
+   "rule": "job-write",
+   "scope": "analysis",
+   "evidence": "security-events: write",
+   "issue": "https://github.com/reihlinstinct/collaboration-docs/issues/19",
+   "reason": "Approved job-scoped SARIF upload to GitHub code scanning; no code or secrets write."
+  },
+  {
+   "path": ".github/workflows/ci.yml",
+   "rule": "unpinned-action",
+   "scope": "docs-checks",
+   "evidence": "actions/checkout@v7",
+   "issue": "https://github.com/reihlinstinct/collaboration-docs/issues/19",
+   "reason": "Pre-existing action ref pinned by tag/branch, not commit SHA; tracked for SHA pinning in this issue."
+  }
+ ]
+}
