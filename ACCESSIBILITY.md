@@ -17,4 +17,5 @@ Accessibility work is ongoing. If something blocks you, we want to know.
 
 Report an accessibility problem by opening an issue:
 https://github.com/reihlinstinct/collaboration-docs/issues/new/choose
-If the report is sensitive, say so in the issue and a maintainer will move the conversation to a private channel.
+If the report is sensitive, use a private security advisory instead and do not put the sensitive details in a public issue:
+https://github.com/reihlinstinct/collaboration-docs/security/advisories/new
