@@ -24,7 +24,7 @@ If you find new work, open an issue first.
 
 ## Tab reviews our PRs too
 - For each non-trivial PR from Instinct (or its agents), Instinct requests Tab's review on the public PR by comment or review request.
-- Tab's review is welcome but never blocks a merge. Instinct merges on green CI, reads the feedback and notes lessons.
+- Independent review PASS on the exact current head is required before merge; green CI alone is not enough. The author cannot be their own reviewer. Record scope, findings and limitations, resolve every finding, and re-review affected changes after new commits. A reviewer-specific waiver is limited to the owner's recorded scope and expiry, not a waiver of independent review. Merge normally with verified signatures and no protection bypass. A merge does not authorize deployment or a live external action.
 - Tab: review for correctness, tests, clarity and risk. Be specific and short.
 
 ## Hard limits
