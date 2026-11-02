@@ -40,9 +40,33 @@ class PersonalDataScanTest(unittest.TestCase):
 
     def test_token_on_scorecard_line_is_flagged(self):
         result = run_scan({'.github/workflows/scorecard.yml':
-                           f'- uses: {SHA} # ghp_abcdefghijklmnop\n'})
+                           f'- uses: {SHA} # ' + 'ghp' + '_' + 'a' * 20 + '\n'})
         self.assertEqual(result.returncode, 1)
         self.assertIn('token', result.stdout)
+
+    def test_classic_installation_token_flagged_without_echo(self):
+        token = 'ghs' + '_' + 'a' * 36
+        result = run_scan({'docs/x.md': f'token: {token}\n'})
+        self.assertEqual(result.returncode, 1, result.stdout)
+        self.assertIn('token', result.stdout)
+        self.assertNotIn(token, result.stdout)
+
+    def test_stateless_installation_token_flagged_without_echo(self):
+        token = 'ghs' + '_12345_' + 'A' * 100 + '.' + 'B' * 300 + '.' + 'C' * 108
+        result = run_scan({'docs/x.md': f'token: {token}\n'})
+        self.assertEqual(result.returncode, 1, result.stdout)
+        self.assertIn('token', result.stdout)
+        self.assertNotIn(token, result.stdout)
+
+    def test_over_520_char_stateless_token_flagged(self):
+        token = 'ghs' + '_12345_' + 'A' * 100 + '.' + 'B' * 300 + '.' + 'C' * 200
+        result = run_scan({'docs/x.md': f'token: {token}\n'})
+        self.assertEqual(result.returncode, 1, result.stdout)
+        self.assertNotIn(token, result.stdout)
+
+    def test_short_token_fragment_passes(self):
+        result = run_scan({'docs/x.md': 'prefix ghs_12345_short suffix\n'})
+        self.assertEqual(result.returncode, 0, result.stdout)
 
     def test_other_long_number_on_scorecard_line_is_flagged(self):
         result = run_scan({'.github/workflows/scorecard.yml':
