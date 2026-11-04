@@ -56,7 +56,10 @@ Do not turn pull_request_target into secret-bearing execution of PR code.
 
 ## Supply chain and reproducibility
 
-Consumers pin full immutable commit SHAs with a human version comment. Pin every
+Consumers pin full immutable commit SHAs with a human version comment.
+The pilot must also replace its current mutable actions/checkout@v7 with a
+verified full commit pin in the same adoption PR; a pinned outer workflow does
+not excuse mutable nested checkout actions. Pin every
 nested action as well. No mutable main/tag, curl-to-shell, runtime pip install or
 implicit network fetch. A local offline CLI invocation is supported from a
 verified cached copy when CI needs independence. Include engine source inventory,
