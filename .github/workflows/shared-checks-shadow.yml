@@ -1,0 +1,33 @@
+name: Shared checks shadow
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  shadow:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Checkout caller
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          path: consumer
+          persist-credentials: false
+      - name: Checkout immutable trusted checks
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          repository: reihlinstinct/repo-checks
+          ref: 9d83bf38a95af1543a57f914c04b33aca0d3f0a0 # reviewed composite action
+          path: trusted-checks
+          persist-credentials: false
+      - name: Shared bounded guard
+        uses: ./trusted-checks/actions/scorecard
+        with:
+          checkout-root: ${{ github.workspace }}/consumer
+      - name: Compare normalized old/shared findings privately
+        env:
+          CALLER_ROOT: ${{ github.workspace }}/consumer
+          TRUSTED_ROOT: ${{ github.workspace }}/trusted-checks
+        run: python3 -I consumer/scripts/ci/check_shared_parity.py
