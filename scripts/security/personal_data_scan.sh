@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 # Scan tracked Markdown/YAML for personal data and secrets.
-# The only exemption is the commit SHA pinned to ossf/scorecard-action in
-# .github/workflows/scorecard.yml: its hex trips the numeric checks, so that
-# exact token is removed before the two numeric checks only. Email, token and
-# private-key checks see every line unmodified, and a real finding on the same
-# line as the action reference is still caught.
+# The only exemption is exact 40-hex action pins (owner/action@<40 hex>) on
+# `uses:` lines: their hex trips the numeric checks, so those tokens are
+# removed before the two numeric checks only. Email, token and private-key
+# checks see every line unmodified, and a real finding on the same line as an
+# action reference is still caught.
 set -u
 cd "$(git rev-parse --show-toplevel)"
 files=$(git ls-files '*.md' '*.yml')
 fail=0
 common='example\.invalid|reihlinstinct|users\.noreply'
-scorecard_sha='ossf/scorecard-action@fa7117db83c52d787ae5a89f350999701505d78e'
+uses_pin='[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+@[a-f0-9]{40}'
 
 check() { # label regex - report file:line only, never the matched content
   hits=$(grep -HnEI "$2" $files | grep -vE "$common" | cut -d: -f1-2 || true)
@@ -19,8 +19,8 @@ check() { # label regex - report file:line only, never the matched content
     echo "::error::possible $1 found"; fail=1; fi
 }
 
-check_num() { # label regex - like check, with the pinned action SHA stripped per token
-  hits=$(grep -HnEI "$2" $files | sed "s|$scorecard_sha||g" | grep -EI "$2" | grep -vE "$common" | cut -d: -f1-2 || true)
+check_num() { # label regex - like check, with exact 40-hex uses: pins stripped per token
+  hits=$(grep -HnEI "$2" $files | sed -E "/uses:/s|$uses_pin||g" | grep -EI "$2" | grep -vE "$common" | cut -d: -f1-2 || true)
   if [ -n "$hits" ]; then
     printf '%s\n' "$hits"
     echo "::error::possible $1 found"; fail=1; fi
