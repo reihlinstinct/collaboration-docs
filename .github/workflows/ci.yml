@@ -10,7 +10,9 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
       - name: Personal-data scan self-tests
         run: python3 -m unittest discover -s tests/security -p 'test_personal_data_scan.py' -v
       - name: Scan for personal data and secrets
@@ -25,3 +27,22 @@ jobs:
             done
           done
           exit $fail
+
+  privacy-shadow:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - name: Existing local guard retained in shadow proof
+        run: bash scripts/security/personal_data_scan.sh
+      - name: Pinned shared privacy guard
+        id: shared
+        uses: reihlinstinct/repo-checks/actions/privacy@c9a60fadeecab75bde9674e96b3d76a5e2fe6645
+        with:
+          checkout-root: ${{ github.workspace }}
+      - name: Shadow proof summary
+        if: always()
+        run: |
+          printf "%s\n" "## Privacy shadow pilot" "- Existing docs-checks local guard retained unchanged." "- Local guard and pinned shared tracked-text guard both must pass." "- Shared outcome: ${{ steps.shared.outcome }}." "- No values, paths, automatic baselines or exemptions published." "- Binary files still require separate review." >> "$GITHUB_STEP_SUMMARY"

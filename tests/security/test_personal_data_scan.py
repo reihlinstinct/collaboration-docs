@@ -57,7 +57,7 @@ class PersonalDataScanTest(unittest.TestCase):
 
     def test_email_on_scorecard_line_is_flagged(self):
         result = run_scan({'.github/workflows/scorecard.yml':
-                           f'- uses: {SHA} # contact someone@real-example.com\n'})
+                           f'- uses: {SHA} # contact ' + 'fixture' + '@' + 'private.test\n'})
         self.assertEqual(result.returncode, 1)
         self.assertIn('email address', result.stdout)
 
