@@ -20,3 +20,7 @@ The same scheme is used in every public repo. Do not add parallel label schemes.
 **Milestones:** `Now` (in progress or due this week), `Next` (planned after Now), `Later` (backlog). High priority goes to Now, medium to Next, low to Later, unless the maintainer decides otherwise.
 
 **Picking an issue:** filter by milestone `Now`, then `Next`. Take high priority first. Skip blocked, held and in-progress items. Comment "taking this", work from a fork, open a PR.
+
+## File placement (enforced)
+
+Decide where a file lives BEFORE creating it. The contract in `.repo-layout.yml` lists the allowed top-level directories, the file types permitted in each, and the required community-standards files; `python tools/check_repo_layout.py` enforces it in CI. A new kind of file means updating the contract in the same PR.
