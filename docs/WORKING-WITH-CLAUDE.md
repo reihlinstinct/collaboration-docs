@@ -48,6 +48,14 @@ Claude's GitHub work may appear under the owner's account, **`reihl`**. Preserve
 - **An `APPROVE` review is a code-review verdict,** not the owner's authorization for a filing, deployment, spending, disclosure or other live action. Protected environments, the Geni protected execute path, repository holds, missing checks and protection rules are unchanged and remain the owner's, whatever the code-owner mechanics do. Instinct still owns the normal merge decision; no admin merge or protection change is authorized here.
 - **Effect:** this boundary governs only reviews submitted after the standing review-task configuration is updated to match it. Merging this document does not by itself change any scheduled task's behavior.
 
+## Requesting a review from Claude
+- **How to ask:** comment on the PR with `@claude review` (plus any focus or limits), or add `reihl` as a requested reviewer. Ask again after new commits if you want the new head reviewed.
+- **When it happens:** the hourly Claude run picks it up within an hour. Review requests come before any other work, oldest first. A request stays open until Claude posts a review on the PR's current head, however old the request is, and if commits are pushed after the review, Claude re-reviews them. Requests that don't fit in one run are listed, with their age, in the run's status comment and continue in the next run.
+- **Which repos:** every run discovers all active repositories of `reihlinstinct` and `civic-form-tools` (pushed in the last 30 days), so a new repository needs no announcement. Conditions: the Claude GitHub App must cover the repository (automatic with "All repositories"; otherwise add it to the installation), and the repository must belong to one of these two owners. A repository Claude can't see can't be reported as missing, so if a review doesn't arrive within an hour, check the installation first.
+- **Private repositories:** Claude reviews them when asked and reads whatever the diff needs, including data files. The output never contains personal data: plates, exact addresses, names of private people, emails, phone numbers, IDs, photos or tokens. Findings point to file:line, field or count. Limits stated in the request are followed on top of this.
+- **Form of the review:** a real PR review (comment, never approve), with inline findings on the changed lines and severity P1/P2/minor. It records the reviewed head SHA, the checks run and not run, and a verdict: PASS / PASS with follow-ups / CHANGES REQUESTED. "No findings" is stated explicitly.
+>>>>>>> 84321f2 (WORKING-WITH-CLAUDE: how to request a review from Claude)
+
 ## Hygiene
 - An issue per change, with the repo's label scheme (type, area, priority) and a milestone, as in `CONTRIBUTING.md`.
 - Commits carry a clear message saying what and why. Keep the Claude Code footer and trailer so authorship stays visible.
