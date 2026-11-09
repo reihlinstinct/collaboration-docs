@@ -24,3 +24,7 @@ The same scheme is used in every public repo. Do not add parallel label schemes.
 ## File placement (enforced)
 
 Decide where a file lives BEFORE creating it. The contract in `.repo-layout.yml` lists the allowed top-level directories, the file types permitted in each, and the required community-standards files; `python3 tools/check_repo_layout.py` enforces it in CI. A new kind of file means updating the contract in the same PR.
+
+## Code layout within files
+
+Order definitions by reading logic, never alphabetically: public API first, helpers right below their first use, grouped sections with marked headers. Files stay small enough to navigate. The full standard is [docs/CODE-LAYOUT.md](docs/CODE-LAYOUT.md); CI enforces its mechanical parts.
