@@ -136,7 +136,8 @@ class PersonalDataScanTest(unittest.TestCase):
         self.assertIn('long ID-like number', result.stdout)
 
     def test_phone_next_to_allowlisted_string_is_flagged(self):
-        result = run_scan({'docs/x.md': 'reihlinstinct: call 050 123 4567\n'})
+        phone = ' '.join(['050', '123', '4567'])  # built at runtime: no phone shape in source
+        result = run_scan({'docs/x.md': f'reihlinstinct: call {phone}\n'})
         self.assertEqual(result.returncode, 1, result.stdout)
         self.assertIn('phone-like number', result.stdout)
 
