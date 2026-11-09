@@ -3,6 +3,9 @@
 Exact 40-hex action pins (owner/action@<40 hex>) on `uses:` lines are exempt
 from the numeric checks only, stripped per token: findings of other kinds on
 the same line, and digit runs anywhere else, must still be reported.
+
+Allowlisted strings (example.invalid, reihlinstinct, users.noreply) exempt only
+the email/URL-like run that contains them, never the whole line (#22).
 """
 import subprocess
 import tempfile
@@ -101,6 +104,47 @@ class PersonalDataScanTest(unittest.TestCase):
         result = run_scan({'docs/x.md': 'BEGIN RSA PRIVATE KEY\n'})
         self.assertEqual(result.returncode, 1)
         self.assertIn('private key', result.stdout)
+
+
+    # #22: allowlisted strings exempt only their own run, never the whole line.
+    def test_allowlisted_runs_alone_pass(self):
+        noreply = '12345678+someone' + '@' + 'users.noreply.github.com'
+        invalid = 'person' + '@' + 'example.invalid'
+        result = run_scan({'docs/x.md': f'{noreply} and {invalid}\n'
+                                        'see https://github.com/reihlinstinct/collaboration-docs\n'})
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_real_email_next_to_allowlisted_string_is_flagged(self):
+        email = 'fixture' + '@' + 'private.test'
+        result = run_scan({'docs/x.md': f'owner reihlinstinct, contact {email}\n'})
+        self.assertEqual(result.returncode, 1, result.stdout)
+        self.assertIn('email address', result.stdout)
+        self.assertNotIn(email, result.stdout)
+
+    def test_token_next_to_allowlisted_email_is_flagged(self):
+        token = 'ghp' + '_' + 'a' * 20
+        invalid = 'person' + '@' + 'example.invalid'
+        result = run_scan({'docs/x.md': f'{invalid} {token}\n'})
+        self.assertEqual(result.returncode, 1, result.stdout)
+        self.assertIn('token', result.stdout)
+        self.assertNotIn(token, result.stdout)
+
+    def test_long_number_next_to_noreply_email_is_flagged(self):
+        noreply = '12345678+someone' + '@' + 'users.noreply.github.com'
+        result = run_scan({'docs/x.md': f'{noreply} id 987654321\n'})
+        self.assertEqual(result.returncode, 1, result.stdout)
+        self.assertIn('long ID-like number', result.stdout)
+
+    def test_phone_next_to_allowlisted_string_is_flagged(self):
+        result = run_scan({'docs/x.md': 'reihlinstinct: call 050 123 4567\n'})
+        self.assertEqual(result.returncode, 1, result.stdout)
+        self.assertIn('phone-like number', result.stdout)
+
+    def test_comma_ends_the_allowlisted_run(self):
+        email = 'fixture' + '@' + 'private.test'
+        result = run_scan({'docs/x.md': f'reihlinstinct,{email}\n'})
+        self.assertEqual(result.returncode, 1, result.stdout)
+        self.assertIn('email address', result.stdout)
 
 
 if __name__ == '__main__':
