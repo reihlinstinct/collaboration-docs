@@ -36,6 +36,10 @@ One header per group. Short names, no numbering.
 - A file above 250 lines must use section headers.
 - Generated files, lockfiles and vendored code are exempt: configure them as
   exclusions, never hand-edit them into compliance.
+- Test files (`tests/`, `test_*`, `*_test`, `*.test.*`, `*.spec.*`) get a
+  higher cap of 600 lines: test modules grow by accretion of cases, so above
+  the cap the remedy is split by topic, not reordering. The section-header
+  rule applies to tests unchanged.
 
 ## What CI enforces
 
