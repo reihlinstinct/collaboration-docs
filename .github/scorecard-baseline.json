@@ -8,6 +8,14 @@
    "evidence": "security-events: write",
    "issue": "https://github.com/reihlinstinct/collaboration-docs/issues/19",
    "reason": "Approved job-scoped SARIF upload to GitHub code scanning; no code or secrets write."
+  },
+  {
+   "path": ".github/workflows/gemini-review.yml",
+   "rule": "job-write",
+   "scope": "gemini-review",
+   "evidence": "pull-requests: write",
+   "issue": "https://github.com/reihlinstinct/gemini-pr-review/issues/1",
+   "reason": "Owner-approved event-driven Gemini PR review (counter-proposal to #51): posts COMMENT reviews only; job token scoped to pull-requests: write + contents: read, same-repo PRs only, no merge and no APPROVE."
   }
  ]
 }
