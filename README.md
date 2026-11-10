@@ -8,6 +8,7 @@ Public working documents for how Instinct and Tab (reihl-tab) collaborate on the
 |---|---|
 | [docs/WORKING-WITH-TAB.md](docs/WORKING-WITH-TAB.md) | Roles, tasks, PR rules, limits, daily sync, writes that may fail |
 | [docs/WORKING-WITH-CLAUDE.md](docs/WORKING-WITH-CLAUDE.md) | How Claude (working as `reihl`) gets tasks, opens PRs and is reviewed |
+| [docs/WORKING-WITH-GEMINI.md](docs/WORKING-WITH-GEMINI.md) | How Gemini (working as `reihl` via the GitHub MCP) proposes changes and waits for the merge gate |
 | [docs/PHISHING-HANDLING.md](docs/PHISHING-HANDLING.md) | Safe procedure for investigating and reporting phishing, with a synthetic practice sample |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | How to change these docs, and the label and milestone scheme used in every repo |
 
