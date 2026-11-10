@@ -34,6 +34,12 @@ Claude's GitHub work may appear under the owner's account, **`reihl`**. Preserve
 - Changed commits need affected re-review. Green CI alone is not enough. Merge normally with verified signatures; do not bypass protections. A merge is not deployment or approval for a live external action.
 - A temporary owner waiver of a named reviewer is limited to its recorded scope and expiry. It does not waive the independent-review gate. If a review or required capability is missing, report the blocker.
 
+### Approval-state review boundary
+
+- **Approval-state reviews:** when asked to independently review another author's PR, Claude may submit an `APPROVE` review only after reading the full diff and relevant source/tests at the exact current head, recording a clean PASS with every finding resolved, and verifying all required CI checks are green at that same head. Re-check the head immediately before submitting; changed commits need affected re-review. Otherwise use `COMMENT` or `REQUEST_CHANGES` with the remaining findings or blocker.
+- This applies to assigned repositories under `reihlinstinct` and `civic-form-tools`, except `traffic-complaint-form`, whose formal approval remains the owner's. Never approve Claude's own change, including changes it authored under a shared account. Preserve attribution when deciding independence.
+- An `APPROVE` review is a code-review verdict, not the owner's authorization for a filing, deployment, spending, disclosure or other live action. It does not waive repository holds, missing checks, reviewer requirements or protection rules. Instinct still owns the normal merge decision; no admin merge or protection change is authorized here.
+
 ## Hygiene
 - An issue per change, with the repo's label scheme (type, area, priority) and a milestone, as in `CONTRIBUTING.md`.
 - Commits carry a clear message saying what and why. Keep the Claude Code footer and trailer so authorship stays visible.
