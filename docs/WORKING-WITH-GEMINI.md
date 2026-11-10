@@ -9,6 +9,20 @@ Gemini works through the owner's GitHub account, **`reihl`**, via the GitHub MCP
 - **Instinct:** reviews and merges, owns repository settings, secrets, private-data decisions, and all contact with the owner and third parties.
 - **Gemini never merges.** If a PR looks ready, say so on the PR and wait for Instinct. Do not merge your own or anyone else's PR, and do not push to `main`.
 
+## Where Gemini helps most
+- **Independent review of open PRs.** Every PR needs an independent review before merge, and reviewers are the team's bottleneck. Read the full diff, the relevant source and the tests at the exact current head; post findings on the changed lines; end with a clear PASS or blocking findings. A generic "looks good" is not a review.
+- **Issue triage:** flag stale issues and duplicates, add missing labels, open an issue with evidence for every bug you find.
+- **Tests and CI:** regression tests for fixed bugs, coverage where it is thin, flaky or slow workflows, deprecation warnings.
+- **Docs:** keep README and guides in sync with behavior, in the same PR as the change.
+- New work starts as an issue first. Claim a task with a "taking this" comment before starting, and finish one task end to end before taking the next.
+
+## Working with Claude and Tab
+- Claude (`@claude`, also acting as `reihl`) and Tab (`reihl-tab`, contributing by fork + PR) work the same repositories under the same gate. Check open issues and PRs before starting; never take a task someone else claimed.
+- **Review lanes:** on your PRs, the independent reviewer is Claude, Tab or Instinct, whichever Instinct asks. On their PRs, you may be the reviewer when Instinct asks. The author never reviews their own change.
+- Feedback on your PR: fix it on the same branch, re-run checks, reply with the commit SHA. No force-push once review has started.
+- Disagreements stay on the thread: state the evidence, let Instinct decide.
+- Status lives in issues and PRs. There is no side channel.
+
 ## The merge gate (why a merge waits)
 Every merge into `main` goes through this gate, whoever opened the PR:
 - Green CI at the exact current head.
@@ -18,11 +32,10 @@ Every merge into `main` goes through this gate, whoever opened the PR:
 - **Paired PRs land together.** Some changes only work as a pair (for example a code change and the behavior change that depends on it). Never merge one half of a pair. If you are not sure whether a PR is paired, ask on the PR and wait.
 - A merge is not deployment. Live external effects (live API writes, spending, deploys, municipal filings, messages to third parties) need the owner's separate approval each time.
 
-## Standard of work
-- Issue first, then branch + PR. One focused change per PR, tests included, description follows the repo template.
-- Label every PR at creation with the repo scheme (`type:`, `area:`, `priority:`) and link its issue, as in `CONTRIBUTING.md`.
-- Verify before claiming done: run the tests and linters and put the evidence (run links, commands, output) in the PR. Report what was not checked.
-- No force-push once review has started. Fix feedback on the same branch, re-run checks, reply with the commit SHA.
+## Regular scan
+- Keep a recurring scan running: a scheduled action if your setup supports one, otherwise the closest recurring mechanism you have. Every few hours, scan the `reihlinstinct` repositories: open issues, open PRs, failing CI, review requests addressed to you.
+- Each scan is read-only first: comment concrete findings on the relevant PR or issue, open issues for new work, claim with "taking this", then work through branch + PR. Never merge from a scan, even when everything looks green.
+- When nothing needs you, say nothing. Do not post noise.
 
 ## Asking before acting
 - Before any write beyond an ordinary branch, commit, PR or comment (merges, repository settings, labels on work you did not open, closing issues, minute-hungry CI runs), ask Instinct on the issue or PR and wait.
