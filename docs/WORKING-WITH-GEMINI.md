@@ -10,7 +10,7 @@ Gemini works through the owner's GitHub account, **`reihl`**, via the GitHub MCP
 - **Gemini never merges.** If a PR looks ready, say so on the PR and wait for Instinct. Do not merge your own or anyone else's PR, and do not push to `main`.
 
 ## Where Gemini helps most
-- **Independent review of open PRs, when Instinct assigns you as the reviewer.** Every PR needs an independent review before merge, and reviewers are the team's bottleneck. Read the full diff, the relevant source and the tests at the exact current head; post findings on the changed lines; end with a clear PASS or blocking findings. A generic "looks good" is not a review. A review you post without being assigned is helpful input for the assigned reviewer, not the gate review.
+- **Independent review of open PRs, when Instinct assigns you as the reviewer.** Every PR needs an independent review before merge, and reviewers are the team's bottleneck. A Gemini review counts toward the merge gate exactly like a Claude PASS or a Tab APPROVE when it meets all of these conditions: it opens with `Gemini review (MCP):`, it is recorded at the exact current head, it is substantive (full diff plus tests, findings on the changed lines), and it ends with an explicit PASS or blocking findings. The owning agent verifies the review on the GitHub API before counting it. A generic "looks good" is not a review, and a review you post without being assigned is helpful input for the assigned reviewer, not the gate review.
 - **Issue triage:** flag stale issues and duplicates (flag, never close on your own), suggest missing labels, open an issue with evidence for every bug you find.
 - **Tests and CI:** regression tests for fixed bugs, coverage where it is thin, flaky or slow workflows, deprecation warnings.
 - **Docs:** keep README and guides in sync with behavior, in the same PR as the change.
@@ -18,7 +18,7 @@ Gemini works through the owner's GitHub account, **`reihl`**, via the GitHub MCP
 
 ## Working with Claude and Tab
 - Claude (`@claude`, also acting as `reihl`) and Tab (`reihl-tab`, contributing by fork + PR) work the same repositories under the same gate. Check open issues and PRs before starting; never take a task someone else claimed.
-- **Review lanes:** Instinct assigns the independent reviewer for each PR - Claude, Tab, Instinct itself, or you. On your PRs you are never the reviewer; the author never reviews their own change. A review counts toward the gate only when it comes from the reviewer Instinct assigned, recorded at the exact current head.
+- **Review lanes:** Instinct assigns the independent reviewer for each PR - Claude, Tab, Instinct itself, or you - and a Gemini review that meets the conditions above counts like any other lane. Independence is by author identity, not by agent name: a review posted under the same account that authored the PR is not independent. A PR authored by reihlinstinct tooling therefore still needs a lane that is not its own author. On your PRs you are never the reviewer. A review counts toward the gate only when it comes from the reviewer Instinct assigned, recorded at the exact current head.
 - Feedback on your PR: fix it on the same branch, re-run checks, reply with the commit SHA. No force-push once review has started.
 - Disagreements stay on the thread: state the evidence, let Instinct decide.
 - Status lives in issues and PRs. There is no side channel.
@@ -26,7 +26,7 @@ Gemini works through the owner's GitHub account, **`reihl`**, via the GitHub MCP
 ## The merge gate (why a merge waits)
 Every merge into `main` goes through this gate, whoever opened the PR:
 - Green CI at the exact current head.
-- Independent review recorded at that same head by the reviewer Instinct assigned for the PR - Claude, Tab, Instinct itself, or Gemini - as a clear PASS or APPROVE. The author is never their own reviewer. New commits after a review need re-review of what changed.
+- Independent review recorded at that same head by the reviewer Instinct assigned for the PR - Claude, Tab, Instinct itself, or Gemini - as a clear PASS or APPROVE. A Gemini review counts only under the conditions in the review section above (prefix, exact head, substantive, API-verified). The author is never their own reviewer, and a review posted under the PR author's own account is not independent. New commits after a review need re-review of what changed.
 - A normal squash merge with verified signatures. Never bypass protections, never merge with failing or missing checks.
 - The squash message carries a full title and body: what changed, why, tests, limits, the issue link - and no personal data. Use a closing keyword (`fixes #N`) only when the PR fully completes the issue; otherwise use `Refs #N`.
 - **Paired PRs land together.** Some changes only work as a pair (for example a code change and the behavior change that depends on it). Never merge one half of a pair. If you are not sure whether a PR is paired, ask on the PR and wait.
