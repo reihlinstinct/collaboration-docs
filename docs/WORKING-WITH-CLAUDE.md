@@ -23,7 +23,7 @@ Claude's GitHub work may appear under the owner's account, **`reihl`**. Preserve
 
 ## Rules for PRs
 - One focused change per PR, tests included, description follows the repo template: what changed, why, tests, limits, `fixes #N`.
-- Never push to `main`, never merge or approve your own PR, never close issues or change labels and milestones unless asked in that thread.
+- Never push to `main`, never merge your own PR or approve it, never close issues or change labels and milestones unless asked in that thread.
 - CI must be green before asking for review. Fix failures your PR caused; on unrelated failures, comment once with the evidence.
 - Feedback on your PR: fix it on the same branch, re-run checks, reply with the commit SHA.
 - No force-push once review has started. No junk files. README and docs are updated in the same PR as the behavior change.
@@ -31,6 +31,7 @@ Claude's GitHub work may appear under the owner's account, **`reihl`**. Preserve
 ## Independent review before merge
 - An author cannot approve their own change. An independent reviewer reads the full diff, relevant source and tests at the exact current head and records PASS or blocking findings.
 - For public PRs, request mutual Claude/Instinct review as recorded in issue #10. Findings belong on the relevant changed lines; address every finding, including minor ones, and have the reviewer confirm resolution.
+- **Formal approval (owner decision 2026-11-14).** After a full review at the exact current head that ends in PASS with no open blocking finding, Claude submits it as a formal GitHub review with state APPROVED at that commit, on PRs authored by Instinct or Tab. It does not approve its own PRs, and a changed head needs a fresh review and a fresh approval. A review with blocking findings stays COMMENT or REQUEST_CHANGES. This is a review state only: Claude still does not merge. It does not waive CI, signatures or any other gate, and it applies to every repo where Claude is asked to review.
 - Changed commits need affected re-review. Green CI alone is not enough. Merge normally with verified signatures; do not bypass protections. A merge is not deployment or approval for a live external action.
 - A temporary owner waiver of a named reviewer is limited to its recorded scope and expiry. It does not waive the independent-review gate. If a review or required capability is missing, report the blocker.
 
