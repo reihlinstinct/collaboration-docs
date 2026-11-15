@@ -14,8 +14,10 @@ account access, spending or publishing permission.
 every planning scheme and building-permit request inside the Ginot HaIr
 community-council area of Jerusalem and publishes them as a public
 [site](https://reihlinstinct.github.io/ginot-hair-plans/) with derived
-objection deadlines, a static data API, a Cloudflare Worker query layer and
-a read-only MCP server.
+objection deadlines, a static data API, a read-only MCP Worker
+(`ginot-hair-mcp`) and a separate write Worker (`ginot-hair-mcp-submit`,
+one `submit_review` tool) that quarantines outside review submissions in a
+private inbox.
 
 ## Load before work
 

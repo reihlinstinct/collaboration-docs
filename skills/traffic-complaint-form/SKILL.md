@@ -15,7 +15,8 @@ fills the Israel Police traffic complaint form from a GitHub Actions
 workflow and emails the filled one-page PDF, encrypted, to the recipient.
 The complainant identity, output password, recipient email and SMTP
 credentials live only in one atomic secret in the protected `production`
-environment; real case data arrives as a sealed-box encrypted payload.
+environment (the case-data private key is a second production secret); real
+case data arrives as a sealed-box encrypted payload.
 
 ## Load before work
 
@@ -30,9 +31,10 @@ environment; real case data arrives as a sealed-box encrypted payload.
 - Every run is gated by the protected environment's required reviewer.
   Output is encrypted in every mode (single: locked PDF; batch: password
   ZIP) and never stored in the repo, artifacts or cache.
-- The pipeline only emails the PDF to the recipient. Filing anything with
-  the police is the owner's separate, explicit decision; never treat a
-  successful run as a filing.
+- The pipeline only emails the output (locked PDF, or a password ZIP in
+  batch mode) to the recipient. Filing anything with the police is the
+  owner's separate, explicit decision; never treat a successful run as a
+  filing.
 - The case-data public key lives in the repo for callers; the private key
   never leaves the protected environment.
 
