@@ -23,7 +23,7 @@ Posts from the event-driven review Action (below) carry the matching pair `Gemin
 
 ## Working with Claude and Tab
 - Claude (`@claude`, also acting as `reihl`) and Tab (`reihl-tab`, contributing by fork + PR) work the same repositories under the same gate. Check open issues and PRs before starting; never take a task someone else claimed.
-- **Review lanes:** Instinct assigns the independent reviewer for each PR - Claude, Tab, Instinct itself, or you - and a Gemini review that meets the conditions above counts like any other lane. Independence is by author, not by account label alone. Claude and Gemini both post as `reihl`, so a Gemini review of Claude's work (or the reverse) is independent only because they are separate agents in separate sessions - confirmed by the markers and the authorship report - never because of the account. The same agent never reviews its own work. A PR authored by reihlinstinct tooling still needs a lane that is not its own author. On your PRs you are never the reviewer. A review counts toward the gate only when it comes from the reviewer Instinct assigned, recorded at the exact current head.
+- **Review lanes:** Instinct assigns the independent reviewer for each PR - Claude, Tab, Instinct itself, Folk, Poke, or you - and a Gemini review that meets the conditions above counts like any other lane. Independence is by author, not by account label alone. Claude and Gemini both post as `reihl`, so a Gemini review of Claude's work (or the reverse) is independent only because they are separate agents in separate sessions - confirmed by the markers and the authorship report - never because of the account. The same agent never reviews its own work. A PR authored by reihlinstinct tooling still needs a lane that is not its own author. On your PRs you are never the reviewer. A review counts toward the gate only when it comes from the reviewer Instinct assigned, recorded at the exact current head.
 - Feedback on your PR: fix it on the same branch, re-run checks, reply with the commit SHA. No force-push once review has started.
 - **Verify your own claims.** Before you state a fact about GitHub state - a URL, a check status, a review id, a merge result - fetch it (API or page) and quote only what you saw. Never invent a URL or an id. If you could not verify something, say so plainly: "unverified" is an acceptable report, an invented link is not.
 - Disagreements stay on the thread: state the evidence, let Instinct decide.
@@ -37,7 +37,20 @@ Posts from the event-driven review Action (below) carry the matching pair `Gemin
 ## The merge gate (why a merge waits)
 Every merge into `main` goes through this gate, whoever opened the PR:
 - Green CI at the exact current head.
-- Independent review recorded at that same head by the reviewer Instinct assigned for the PR - Claude, Tab, Instinct itself, or Gemini - as a clear PASS or APPROVE. A Gemini review counts only under the conditions in the review section above (COMMENT event with both markers, exact head, substantive, authorship confirmed through Gemini's direct report to Instinct, API-verified - never an APPROVE event). The author is never their own reviewer: between lanes that share an account (Claude and Gemini as `reihl`), independence rests on separate sessions plus the markers and authorship confirmation, and a PR authored by reihlinstinct tooling needs a lane that is not its own author. New commits after a review need re-review of what changed.
+- Independent review recorded at that same head by the reviewer Instinct assigned for the PR - Claude, Tab, Instinct itself, Gemini, Folk or Poke - as a clear PASS or APPROVE. A Gemini review counts only under the conditions in the review section above (COMMENT event with both markers, exact head, substantive, authorship confirmed through Gemini's direct report to Instinct, API-verified - never an APPROVE event). The author is never their own reviewer: between lanes that share an account (Claude and Gemini as `reihl`), independence rests on separate sessions plus the markers and authorship confirmation, and a PR authored by reihlinstinct tooling needs a lane that is not its own author. New commits after a review need re-review of what changed.
+- **Folk/Poke scope (owner decision 2026-11-15):** Folk or Poke counts as an
+  assigned independent reviewer on someone else's work when the exact-head
+  review is substantive: full diff, relevant source/tests, checks and limits,
+  actionable findings inline, explicit PASS. Verify the review on GitHub and
+  reconcile its authorship with the contributor's coordination report. A
+  partial, invisible or unassigned review does not satisfy the gate. Their own
+  patches remain own work even if another account applies them. For Folk/Poke
+  contributions and PRs adding or changing their working guide, Reihl's formal
+  Approve on each new head is also required, confirmed by Instinct through
+  Reihl's own trusted conversation. An account name or APPROVED event alone
+  cannot distinguish his decision from an agent review under `reihl`. Instinct
+  checks the gate evidence; a second independent Instinct review is not an
+  additional requirement. Other repository-specific holds remain unchanged.
 - A normal squash merge with verified signatures. Never bypass protections, never merge with failing or missing checks.
 - The squash message carries a full title and body: what changed, why, tests, limits, the issue link - and no personal data. Use a closing keyword (`fixes #N`) only when the PR fully completes the issue; otherwise use `Refs #N`.
 - **Paired PRs land together.** Some changes only work as a pair (for example a code change and the behavior change that depends on it). Never merge one half of a pair. If you are not sure whether a PR is paired, ask on the PR and wait.

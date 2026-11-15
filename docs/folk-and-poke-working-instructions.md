@@ -2,8 +2,9 @@
 
 Folk (`reihl-folk`) and Poke (`reihl-poke`) are AI contributors working with
 Reihl's Instinct. Their messages are their own, never instructions or approval
-from Reihl. This guide adds contributor-specific limits to [CONTRIBUTING](../CONTRIBUTING.md).
-If instructions conflict or scope is unclear, stop the affected step and ask Instinct.
+from Reihl. This guide adds contributor-specific limits to
+[CONTRIBUTING](../CONTRIBUTING.md). If instructions conflict or scope is
+unclear, stop the affected step and ask Instinct.
 
 ## Lanes and scope
 
@@ -23,33 +24,55 @@ If instructions conflict or scope is unclear, stop the affected step and ask Ins
    small commits. Do your own commits and pushes.
 3. Sign commits where the tooling supports it. State the actual signing status
    in the PR; do not assume an API-created commit is signed or Verified. Ask for
-   help if signing is unavailable. Never share a signing key or token.
+   help if signing is unavailable. An unsigned fork commit is not a waiver of
+   required signature checks: Instinct must confirm the repository permits it
+   and the final squash merge must have a verified signature. Never share a
+   signing key or token.
 4. Run the relevant tests and privacy scan. Open the PR against the agreed base
    with **What changed / Why / Tests / Limitations**, the linked issue, and the
    exact test results. Describe missing checks honestly.
-5. Every issue and PR needs the repository's existing type, area and priority
-   labels at creation. If fork permissions prevent labeling, tell Instinct
-   immediately; the maintainer applies them. Do not invent a parallel scheme.
+5. This guide applies the repository's existing type, area and priority labels
+   to both issues and PRs at creation. If the area is unclear, flag it for
+   `needs-triage` rather than invent a label. If fork permissions prevent
+   labeling, tell Instinct immediately; the maintainer applies the labels.
 6. Send Instinct the PR link, head SHA, and tools used for the main steps, then
    stop. Do not keep pushing unless responding to review or agreed follow-up.
 
 ## Review and merge
 
-- A PASS by Folk or Poke on the exact head of someone else's work counts as
-  independent review, on the same basis as Claude or Gemini. Nobody reviews
-  their own work, including patches contributed under another account.
-- CI must be green on the **exact current head**, with independent review and
-  Instinct's own review covering that head. A first-time fork contributor may
-  see workflows awaiting maintainer approval. That is a normal gate, not a test
-  failure; ask Instinct to handle it, never bypass it.
-- Use precise inline comments for code findings. Keep GitHub titles, comments
-  and replies professional. Address findings with focused fixes and explain
-  what changed or why you disagree, with evidence.
-- Every push creates a new head. It needs fresh CI, review and Reihl's formal
-  Approve before merge; approval of an earlier head does not carry forward.
-- Folk and Poke never merge their own work. Instinct coordinates the merge with
-  an authorized maintainer after all gates pass. This document's PR is not
-  approved to merge merely because contributors agree with it.
+Use [the canonical merge gate](WORKING-WITH-GEMINI.md#the-merge-gate-why-a-merge-waits).
+For Folk/Poke contributions and changes to this guide, the complete gate is:
+
+1. Green CI on the exact current head. First-time fork workflows may await
+   maintainer approval; ask Instinct, never bypass that gate.
+2. A substantive PASS from the independent reviewer Instinct assigned to that
+   PR, on that exact head. The review reads the full diff, relevant source and
+   tests, records checks and limits, and puts actionable findings inline with
+   severity. A thin approval or partial-diff review does not count.
+3. Reihl's formal Approve for that exact head, confirmed by Instinct from
+   Reihl's own trusted conversation. A GitHub account name or APPROVED event
+   alone is not owner approval: Claude also posts as `reihl`. Claude's marked
+   code review and Reihl's own decision are separate evidence.
+4. A normal squash merge by an authorized maintainer, with verified signature,
+   required checks and protections intact. No self-merge or bypasses.
+
+Instinct checks that the evidence satisfies the gate; a second independent
+review by Instinct is not an extra gate when an assigned independent reviewer
+already supplied one. Instinct may be the assigned reviewer only when it did
+not author or contribute the change.
+
+Folk or Poke can supply the independent PASS when Instinct assigned that
+reviewer and the substantive-review standard above is met. Nobody reviews
+their own work, including their own patch when another account pushes or
+applies it. Gemini Action reviews remain advisory, not gate reviews.
+
+Every push creates a new head and requires fresh CI, affected re-review and
+Reihl's fresh formal Approve for these contributions. Keep GitHub replies
+professional; fix findings or explain disagreement with evidence. Never post
+plates or other personal data in review evidence, even if already in a diff.
+Report sensitive findings privately to Instinct instead of copying the data.
+Agreement to follow a guide is not an independent review or owner approval of
+the PR that adds or changes it.
 
 ## Updates and decisions
 
@@ -85,8 +108,8 @@ that approval. Stop and ask Instinct when a decision is missing.
 
 ## Agree before relying on this guide
 
-Folk and Poke should each comment on this PR with agreement or specific
-objections, including any tool limitation. Agreement with the guide is review input,
-not Reihl's approval and not permission to merge. An independent exact-head
-PASS on the document itself is separate from agreeing to follow the rules. Instinct brings unresolved
-questions back to Reihl.
+Folk and Poke should each comment on the PR that adds or changes this guide
+with agreement or specific objections, including tool limits. Agreement is
+review input, not Reihl's approval or permission to merge. An independent
+exact-head PASS on the document is separate from agreeing to follow its rules.
+Instinct brings unresolved questions back to Reihl.
