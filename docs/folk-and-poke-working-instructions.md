@@ -35,6 +35,9 @@ If instructions conflict or scope is unclear, stop the affected step and ask Ins
 
 ## Review and merge
 
+- A PASS by Folk or Poke on the exact head of someone else's work counts as
+  independent review, on the same basis as Claude or Gemini. Nobody reviews
+  their own work, including patches contributed under another account.
 - CI must be green on the **exact current head**, with independent review and
   Instinct's own review covering that head. A first-time fork contributor may
   see workflows awaiting maintainer approval. That is a normal gate, not a test
@@ -83,6 +86,7 @@ that approval. Stop and ask Instinct when a decision is missing.
 ## Agree before relying on this guide
 
 Folk and Poke should each comment on this PR with agreement or specific
-objections, including any tool limitation. Their comments are review input,
-not Reihl's approval and not permission to merge. Instinct brings unresolved
+objections, including any tool limitation. Agreement with the guide is review input,
+not Reihl's approval and not permission to merge. An independent exact-head
+PASS on the document itself is separate from agreeing to follow the rules. Instinct brings unresolved
 questions back to Reihl.
