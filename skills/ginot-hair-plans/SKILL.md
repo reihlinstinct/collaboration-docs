@@ -20,6 +20,7 @@ a read-only MCP server.
 ## Load before work
 
 - Repo [README](https://github.com/reihlinstinct/ginot-hair-plans#readme): purpose, data sources, Data API and MCP sections
+- [worker/README.md](https://github.com/reihlinstinct/ginot-hair-plans/blob/main/worker/README.md): the read-only API/MCP Workers and the submission rules
 - [Contributor rules](../../CONTRIBUTING.md)
 - [Canonical merge gate](../../docs/WORKING-WITH-GEMINI.md#the-merge-gate-why-a-merge-waits)
 
@@ -31,9 +32,9 @@ a read-only MCP server.
 - Objection talking points and drafts are recommendations for the owner and
   the planner. Nothing is ever auto-filed; filing an objection is the
   owner's decision per case.
-- Outside review submissions through the MCP arrive unverified, land in a
-  private submissions area and never go live automatically; the Worker API
-  returns only approved fields.
+- Outside review submissions through the write Worker arrive unverified,
+  land in a private submissions inbox and never go live automatically; the
+  read-only Worker API returns only approved fields.
 - Public reviews never attribute information to the owner and carry no
   internal correction notes.
 - Free-tier limits apply (Cloudflare builds, Actions minutes): keep the

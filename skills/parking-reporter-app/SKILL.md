@@ -13,9 +13,10 @@ account access, spending or publishing permission.
 [parking-reporter-app](https://github.com/reihlinstinct/parking-reporter-app)
 is the open-source Android development preview (Kotlin, Hebrew UI, English
 documentation): CameraX capture with EXIF evidence, on-device plate
-recognition and category suggestion, encrypted reporter settings, a review
-screen before sending, and staged municipal submission. It is the mobile
-counterpart of the 106 reporting pipeline.
+recognition, manual category choice from the captured municipal catalog,
+encrypted reporter settings, a review screen before sending, and staged
+municipal submission. It is the mobile counterpart of the 106 reporting
+pipeline.
 
 ## Load before work
 

@@ -27,9 +27,9 @@ environment; real case data arrives as a sealed-box encrypted payload.
 
 - The public repo contains no personal data: no names, ID numbers, plates,
   locations or incident details in code, tests, issues or logs.
-- Every run is gated by the protected environment's required reviewer. The
-  PDF is encrypted in every mode and never stored in the repo, artifacts or
-  cache.
+- Every run is gated by the protected environment's required reviewer.
+  Output is encrypted in every mode (single: locked PDF; batch: password
+  ZIP) and never stored in the repo, artifacts or cache.
 - The pipeline only emails the PDF to the recipient. Filing anything with
   the police is the owner's separate, explicit decision; never treat a
   successful run as a filing.

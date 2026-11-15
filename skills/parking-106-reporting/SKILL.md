@@ -29,9 +29,11 @@ a separate private data repository that runs reviewed versions of this code.
 
 - Nothing private in the public repo: no photos, plates, ID numbers,
   reporter details, credentials or real registry snapshots.
-- Read-only API calls (GET checks, catalogs) need no approval. A real
-  submission that opens a municipal case follows the approval rules Instinct
-  states for the task; never file from an unreviewed change.
+- Live 106 calls, read-only ones included (even the catalog GET needs a
+  municipal session token), run only from the approved private runner within
+  an assigned task; agent work stays offline: tests, mocks and dry runs. A
+  real submission that opens a municipal case follows the approval rules
+  Instinct states for the task; never file from an unreviewed change.
 - One report per vehicle; never risk a duplicate case. Retries only while
   nothing has reached the municipality.
 - Private-runner Actions minutes are budgeted: run tests on code changes
