@@ -17,7 +17,8 @@ These documents are general. They contain no personal data, credentials, or deta
 
 ## Bot setup
 
-[Per-bot Skills and loading instructions](skills/README.md) provide short
-entry points for Tab, Folk and Poke without duplicating the working guides.
+[Bot and solution Skills and loading instructions](skills/README.md) provide
+short entry points for Tab, Folk and Poke, and for each built solution,
+without duplicating the working guides.
 
 License: MIT.

@@ -12,7 +12,8 @@ access, spending or publishing permission.
 
 [traffic-complaint-form](https://github.com/civic-form-tools/traffic-complaint-form)
 fills the Israel Police traffic complaint form from a GitHub Actions
-workflow and emails the filled one-page PDF, encrypted, to the recipient.
+workflow and emails the filled one-page PDF, encrypted, to the recipient
+(in batch mode, one password ZIP of the filled PDFs).
 The complainant identity, output password, recipient email and SMTP
 credentials live only in one atomic secret in the protected `production`
 environment (the case-data private key is a second production secret); real

@@ -26,7 +26,7 @@ authorized configuration route:
 
 > Before collaboration work, load your own SKILL.md and all guides it names
 > from the reviewed collaboration-docs revision selected at setup. When a
-> task assigns work on one of the solutions below, load that solution's
+> task assigns work on one of the solutions listed above, load that solution's
 > SKILL.md alongside your own, at the same revision. Report the revision and
 > any unavailable file to Instinct. If loading is unsupported, read the
 > files through an available reader before work; do not claim that automatic
