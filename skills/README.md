@@ -25,10 +25,12 @@ Add this requirement to each external bot's setup through its supported,
 authorized configuration route:
 
 > Before collaboration work, load your own SKILL.md and all guides it names
-> from the reviewed collaboration-docs revision selected at setup. Report the
-> revision and any unavailable file to Instinct. If loading is unsupported,
-> read the files through an available reader before work; do not claim that
-> automatic loading is configured. Stop if required rules cannot be read.
+> from the reviewed collaboration-docs revision selected at setup. When a
+> task assigns work on one of the solutions below, load that solution's
+> SKILL.md alongside your own, at the same revision. Report the revision and
+> any unavailable file to Instinct. If loading is unsupported, read the
+> files through an available reader before work; do not claim that automatic
+> loading is configured. Stop if required rules cannot be read.
 
 Instinct coordinates setup and confirms the bot can read the selected entry
 point and guides. This documentation change does not modify any bot's setup.
