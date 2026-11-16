@@ -38,6 +38,37 @@ unclear, stop the affected step and ask Instinct.
 6. Send Instinct the PR link, head SHA, and tools used for the main steps, then
    stop. Do not keep pushing unless responding to review or agreed follow-up.
 
+## Poke task checklist
+
+A task means a tracked issue in the target repository, not only an email,
+chat request or PR. Before coding, agree the issue and scope with Instinct.
+If there is no issue, ask Instinct to create or confirm one. Check open issues
+and PRs for the same work, then comment "taking this" on the agreed issue.
+If someone is already working on it, coordinate instead of opening a duplicate.
+Record acceptance criteria, risks and a short task checklist in the issue.
+
+Copy the applicable tasks into the PR description and keep them current:
+
+- [ ] Link the agreed issue (`Closes #N`, or `Refs #N` for partial work).
+- [ ] One focused change, small meaningful commits, and an explanation of why.
+- [ ] Correct existing type, area and priority labels, or an explicit request
+  to Instinct to apply them when permissions prevent it.
+- [ ] Relevant tests and privacy scan, with exact commands and results.
+  Mark unavailable checks as not run, explain why, and name the CI check
+  needed; never mark a task complete just because CI was requested.
+- [ ] README, docs and Wiki impact checked; update them in the same PR when
+  needed, or explain why no change is needed.
+- [ ] Signing status, limitations and current head SHA reported to Instinct.
+- [ ] Independent exact-head review requested through Instinct; existing
+  review and owner-approval gates remain unchanged.
+
+Tick a task only after it is done and verified. Update the issue and PR after
+review fixes; leave pending tests and reviews unchecked. Follow the target
+repository's PR template as well. Preserve required attribution or review
+request markers where that repository requires them; do not invent a PASS,
+review request or approval footer. Send Instinct the issue link, PR link and
+head SHA together. A checklist supplements the issue link, never replaces it.
+
 ## Review and merge
 
 Use [the canonical merge gate](WORKING-WITH-GEMINI.md#the-merge-gate-why-a-merge-waits).
