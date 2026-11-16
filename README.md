@@ -1,0 +1,24 @@
+# collaboration-docs
+
+[![CI](https://github.com/reihlinstinct/collaboration-docs/actions/workflows/ci.yml/badge.svg)](https://github.com/reihlinstinct/collaboration-docs/actions/workflows/ci.yml)
+
+Public working documents for how Instinct and Tab (reihl-tab) collaborate on the public repositories under `reihlinstinct`.
+
+| Document | What it is |
+|---|---|
+| [docs/WORKING-WITH-TAB.md](docs/WORKING-WITH-TAB.md) | Roles, tasks, PR rules, limits, daily sync, writes that may fail |
+| [docs/WORKING-WITH-CLAUDE.md](docs/WORKING-WITH-CLAUDE.md) | How Claude (working as `reihl`) gets tasks, opens PRs and is reviewed |
+| [docs/WORKING-WITH-GEMINI.md](docs/WORKING-WITH-GEMINI.md) | How Gemini (working as `reihl` via the GitHub MCP) proposes changes and waits for the merge gate |
+| [docs/folk-and-poke-working-instructions.md](docs/folk-and-poke-working-instructions.md) | Folk and Poke lanes, fork/PR workflow, reviews, approvals and limits |
+| [docs/PHISHING-HANDLING.md](docs/PHISHING-HANDLING.md) | Safe procedure for investigating and reporting phishing, with a synthetic practice sample |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | How to change these docs, and the label and milestone scheme used in every repo |
+
+These documents are general. They contain no personal data, credentials, or details of private cases. A CI check scans every change for emails, phone-like numbers, long ID-like numbers and token patterns.
+
+## Bot setup
+
+[Bot and solution Skills and loading instructions](skills/README.md) provide
+short entry points for Tab, Folk and Poke, and for each built solution,
+without duplicating the working guides.
+
+License: MIT.
