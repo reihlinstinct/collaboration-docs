@@ -43,7 +43,7 @@ jobs:
         run: bash scripts/security/personal_data_scan.sh
       - name: Pinned shared privacy guard
         id: shared
-        uses: reihlinstinct/repo-checks/actions/privacy@c9a60fadeecab75bde9674e96b3d76a5e2fe6645
+        uses: reihlinstinct/repo-checks/actions/privacy@81f3dd292a8e7b7a5b2686f957dd7d6e2408b6f7
         with:
           checkout-root: ${{ github.workspace }}
       - name: Shadow proof summary
