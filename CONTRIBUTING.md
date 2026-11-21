@@ -19,7 +19,7 @@ The same scheme is used in every public repo. Do not add parallel label schemes.
 
 **Milestones:** `Now` (in progress or due this week), `Next` (planned after Now), `Later` (backlog). High priority goes to Now, medium to Next, low to Later, unless the maintainer decides otherwise.
 
-**Picking an issue:** filter by milestone `Now`, then `Next`. Take high priority first. Skip blocked, held and in-progress items. Comment "taking this", work from a fork, open a PR.
+**Picking an issue:** filter by milestone `Now`, then `Next`. Take high-priority items first. Skip blocked, held and in-progress items. Comment "taking this", work from a fork, open a PR.
 
 ## File placement (enforced)
 
